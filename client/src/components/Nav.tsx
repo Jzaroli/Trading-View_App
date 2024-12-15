@@ -1,6 +1,17 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import auth from '../utils/auth';
+import auth from '../utils/auth.ts';
+import lineGraph from '../assets/line_graph.gif';
+
+const styles = {
+
+  nav: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  }  
+
+}
 
 const Navbar = () => {
   const [ loginCheck, setLoginCheck ] = useState(false);
@@ -17,29 +28,53 @@ const Navbar = () => {
   }, [loginCheck])
 
   return (
-    <div className='nav'>
-      <div className='nav-title'>
-        <Link to='/'><h2>Let's Make A Trade</h2></Link>
+    <div className='nav' style={{
+      backgroundImage: `url(${lineGraph})`,
+      // backgroundSize: 'contain', // or 'contain'
+      // backgroundRepeat: 'no-repeat',
+      display: 'flex',
+      borderRadius: '8px'
+      
+      }}>
+    <div className='nav-title'>
+        <Link to='/' style={{
+          fontSize: '36px',
+          color: 'blue',
+          textDecoration: 'none',
+          
+          }}>
+            <h2>Let's Make A Trade</h2></Link>
       </div>
-      <ul>
-        <li className='nav-item'>
-          <button type='button' id='create-ticket-link'>
-            <Link to='/create' >Favorite Stocks</Link>
+      <ul className='nav-item' style={{}}>
+          <button type='button' id='favorites-link' style={{
+            fontSize: '18px', 
+            backgroundColor: 'green', 
+            borderRadius: '8px', 
+            boxShadow: '0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)',
+            margin: '5px',
+            display: 'block',
+
+            
+            }}>
+            <Link to='/favorites' style={{textDecoration: 'none'}}>Favorite Stocks</Link>
           </button>
-        </li>
-    {
+      {
         !loginCheck ? (
-          <li className='nav-item'>
-            <button type='button'>
-              <Link to='/login'>Login</Link>
+            <button type='button' style={{
+              fontSize: '18px', 
+              backgroundColor: 'green', 
+              borderRadius: '8px', 
+              boxShadow: '0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)',
+              margin: '5px',
+              display: 'block',
+
+              }}>
+              <Link to='/login' style={{textDecoration: 'none'}}>Login</Link>
             </button>
-          </li>
         ) : (
-          <li className='nav-item'>
             <button type='button' onClick={() => {
               auth.logout();
             }}>Logout</button>
-          </li>
         )
       }
       </ul>
