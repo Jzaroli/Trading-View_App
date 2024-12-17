@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import auth from '../utils/auth.ts';
-import lineGraph from '../assets/line_graph.gif';
+// import lineGraph from '../assets/line_graph.gif';
 
-const styles = {
+// const styles = {
 
-  nav: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  }  
+//   nav: {
+//     display: 'flex',
+//     flexDirection: 'row',
+//     flexWrap: 'wrap',
+//   }  
 
-}
+// }
 
 const Navbar = () => {
   const [ loginCheck, setLoginCheck ] = useState(false);
@@ -29,14 +29,14 @@ const Navbar = () => {
 
   return (
     <div className='nav' style={{
-      backgroundImage: `url(${lineGraph})`,
+      // backgroundImage: `url(${lineGraph})`,
       // backgroundSize: 'contain', // or 'contain'
       // backgroundRepeat: 'no-repeat',
       display: 'flex',
       borderRadius: '8px'
       
       }}>
-    <div className='nav-title'>
+      <div className='nav-title'>
         <Link to='/' style={{
           fontSize: '36px',
           color: 'blue',
