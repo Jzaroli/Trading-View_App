@@ -1,27 +1,27 @@
 import express from 'express';
 import {
-  getAllTickets,
-  getTicketById,
-  createTicket,
-  updateTicket,
-  deleteTicket,
+  getAllStocks,
+  getStockById,
+  createStock,
+  updateStock,
+  deleteStock,
 } from '../../controllers/stock-controller.js';
 
 const router = express.Router();
 
-// GET /tickets - Get all tickets
-router.get('/', getAllTickets);
+// GET /stocks - Get all stocks
+router.get('/', getAllStocks);
 
-// GET /tickets/:id - Get a ticket by id
-router.get('/:id', getTicketById);
+// GET /stock/:id - Get a stock by id
+router.get('/:id', getStockById);
 
-// POST /tickets - Create a new ticket
-router.post('/', createTicket);
+// POST /stocks - Create a new stock
+router.post('/', createStock);
 
-// PUT /tickets/:id - Update a ticket by id
-router.put('/:id', updateTicket);
+// PUT /stocks/:id - Update a stock by id
+router.put('/:id', updateStock);
 
-// DELETE /tickets/:id - Delete a ticket by id
-router.delete('/:id', deleteTicket);
+// DELETE /stocks/:id - Delete a stock by id
+router.delete('/:id', deleteStock);
 
 export { router as stockRouter };
