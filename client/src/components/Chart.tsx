@@ -49,3 +49,5 @@ const LineChart: React.FC = () => {
       return <Line data={data} options={options} />;
     };
 export default LineChart;
+
+// Added line graph
