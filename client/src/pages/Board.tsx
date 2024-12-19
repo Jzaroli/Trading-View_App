@@ -1,36 +1,37 @@
-// import { useEffect, useState, useLayoutEffect } from 'react';
+import { useEffect, useState, useLayoutEffect } from 'react';
 // import { Link } from 'react-router-dom';
 
-// import { retrieveTickets, deleteTicket } from '../api/stockAPI';
-// import ErrorPage from './ErrorPage';
+import { getAllStocks } from '../api/stockAPI';
+import ErrorPage from './ErrorPage';
 // import Swimlane from '../components/Swimlane';
-// import { StockAttributes } from '../interfaces/StockAttributes.tsx';
+import { StockData } from '../interfaces/StockData.tsx';
+import Login from './Login.tsx'
 // import { ApiMessage } from '../interfaces/ApiMessage';
 
-// import auth from '../utils/auth';
+import auth from '../utils/auth';
 
 // const boardStates = ['Todo', 'In Progress', 'Done'];
 
-// const Board = () => {
-//   const [tickets, setTickets] = useState<StockAttributes[]>([]);
-//   const [error, setError] = useState(false);
-//   const [loginCheck, setLoginCheck] = useState(false);
+const DashBoard = () => {
+  const [stocks, setStocks] = useState<StockData[]>([]);
+  const [error, setError] = useState(false);
+  const [loginCheck, setLoginCheck] = useState(false);
 
-//   const checkLogin = () => {
-//     if(auth.loggedIn()) {
-//       setLoginCheck(true);
-//     }
-//   };
+  const checkLogin = () => {
+    if(auth.loggedIn()) {
+      setLoginCheck(true);
+    }
+  };
 
-//   const fetchTickets = async () => {
-//     try {
-//       const data = await retrieveTickets();
-//       setTickets(data);
-//     } catch (err) {
-//       console.error('Failed to retrieve tickets:', err);
-//       setError(true);
-//     }
-//   };
+  const fetchStocks = async () => {
+    try {
+      const data = await getAllStocks();
+      setStocks(data);
+    } catch (err) {
+      console.error('Failed to retrieve stocks:', err);
+      setError(true);
+    }
+  };
 
 //   const deleteIndvTicket = async (ticketId: number) : Promise<ApiMessage> => {
 //     try {
@@ -42,52 +43,55 @@
 //     }
 //   }
 
-//   useLayoutEffect(() => {
-//     checkLogin();
-//   }, []);
+  useLayoutEffect(() => {
+    checkLogin();
+  }, []);
 
-//   useEffect(() => {
-//     if(loginCheck) {
-//       fetchTickets();
-//     }
-//   }, [loginCheck]);
+  useEffect(() => {
+    if(loginCheck) {
+        fetchStocks();
+        console.log(stocks);
+    }
+  }, [loginCheck]);
 
-//   if (error) {
-//     return <ErrorPage />;
-//   }
+  if (error) {
+    return <ErrorPage />;
+  }
 
-//   return (
-//     <>
-//     {
-//       !loginCheck ? (
-//         <div className='login-notice'>
-//           <h1>
-//             Login to create & view tickets
-//           </h1>
-//         </div>  
-//       ) : (
-//           <div className='board'>
-//             <button type='button' id='create-ticket-link'>
-//               <Link to='/create' >New Ticket</Link>
-//             </button>
-//             <div className='board-display'>
-//               {boardStates.map((status) => {
-//                 const filteredTickets = tickets.filter(ticket => ticket.status === status);
-//                 return (
-//                   <Swimlane 
-//                     title={status} 
-//                     key={status} 
-//                     tickets={filteredTickets} 
-//                     deleteTicket={deleteIndvTicket}
-//                   />
-//                 );
-//               })}
-//             </div>
-//           </div>
-//         )
-//     }
-//     </>
-//   );
-// };
+  return (
+    <>
+    {
+      !loginCheck ? (
+        <div className='login-notice'>
+          <h1>
+            Login to create & view stocks!
+          </h1>
+          <Login />
+        </div>  
+      ) : (
+          <div className='board'>
+            <button type='button' id='create-stock-link'>
+              {/* <Link to='/create' >New Stock</Link> */}
+            </button>
+            <div className='board-display'>
+            <p>This is a test</p>
+              {/* {boardStates.map((status) => {
+                const filteredTickets = tickets.filter(ticket => ticket.status === status);
+                return (
+                  <Swimlane 
+                    title={status} 
+                    key={status} 
+                    tickets={filteredTickets} 
+                    deleteTicket={deleteIndvTicket}
+                  />
+                );
+              })} */}
+            </div>
+          </div>
+        )
+    }
+    </>
+  );
+};
 
-// export default Board;
+export default DashBoard;
