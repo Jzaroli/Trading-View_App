@@ -1,68 +1,47 @@
-import { useEffect, useState, useLayoutEffect } from 'react';
+import { useState, useLayoutEffect, ChangeEvent, FormEvent } from 'react';
 // import { Link } from 'react-router-dom';
-import React from 'react';
-
-import { getAllStocks } from '../api/stockAPI';
-import ErrorPage from './ErrorPage';
-// import Swimlane from '../components/Swimlane';
-import { StockData } from '../interfaces/StockData.tsx';
 import Login from './Login.tsx'
-// import { ApiMessage } from '../interfaces/ApiMessage';
-
 import auth from '../utils/auth';
-// const boardStates = ['Todo', 'In Progress', 'Done'];
-
-import LineChart from '../components/Chart.tsx';
+import { searchAlpacaSymbol } from '../api/alpacaAPI';
 
 
-const DashBoard:React.FC = () => {
-  const [stocks, setStocks] = useState<StockData[]>([]);
-  const [error, setError] = useState(false);
+const DashBoard = () => {
+
   const [loginCheck, setLoginCheck] = useState(false);
+  const [stockSymbol, setStockSymbol] = useState('');
 
   const checkLogin = () => {
     if(auth.loggedIn()) {
       setLoginCheck(true);
     }
   };
-
-  const fetchStocks = async () => {
-    try {
-      const data = await getAllStocks();
-      setStocks(data);
-    } catch (err) {
-      console.error('Failed to retrieve stocks:', err);
-      setError(true);
-    }
-  };
   
-
-  // const deleteIndvStock = async (stockId: number) : Promise<ApiMessage> => {
-  //   try {
-  //     const data = await deleteStock(stockId);
-  //     fetchStocks();
-  //     return data;
-  //   } catch (err) {
-  //     return Promise.reject(err);
-  //   }
-  // }
-
   useLayoutEffect(() => {
     checkLogin();
   }, []);
 
-  useEffect(() => {
-    if(loginCheck) {
-        fetchStocks();
-        console.log(stocks);
+// Searches for stock based on symbol
+  const searchStock = async (e: FormEvent) => {
+    e.preventDefault();
+    try {
+        const data = await searchAlpacaSymbol(stockSymbol);
+    if (data) {  
+        console.log(data);
+        console.log('Found Stock');
+    } else {
+        console.log('No stocks found');
     }
-  }, [loginCheck]);
+    } catch (error) {
+        console.error('Error fetching stocks:', error);
+    }
+    };  
 
-  if (error) {
-    return <ErrorPage />;
-  }
+const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const {value} = e.target;
+    setStockSymbol(value);
+    // console.log(stockSymbol);
+}
 
-  
   return (
     <>
     {
@@ -74,28 +53,19 @@ const DashBoard:React.FC = () => {
           <Login />
         </div>  
       ) : (
-          <div className='board'>
-            <button type='button' id='create-stock-link'>
-              {/* <Link to='/create' >New Stock</Link> */}
-              ➕
-            </button>
-            <div className='board-display'>
-              
-            <LineChart />
-            
-              {/* {boardStates.map((status) => {
-                const filteredTickets = stocks.filter(stock => stock.status === status);
-                return (
-                  <Swimlane 
-                    title={status} 
-                    key={status} 
-                    stocks={filteredTickets} 
-                    // deleteStock={deleteIndvStock}
-                  />
-                );
-              })} */}
-            </div>
-          </div>
+        <div>
+            <form className='form'onSubmit={searchStock}  >
+                <label>Stock Symbol</label>
+                <input 
+                    type='text'
+                    name='symbol'
+                    value={stockSymbol || ''}
+                    onChange={handleChange}
+                    required
+                />
+                <button type='submit'>Search</button>
+            </form>
+        </div>
         )
     }
     </>
@@ -103,3 +73,42 @@ const DashBoard:React.FC = () => {
 };
 
 export default DashBoard;
+
+
+// import { getAllStocks } from '../api/stockAPI';
+// import ErrorPage from './ErrorPage';
+// import { ApiMessage } from '../interfaces/ApiMessage';
+// import { StockData } from '../interfaces/StockData.tsx';
+
+//   const [stocks, setStocks] = useState<StockData[]>([]);
+//   const [error, setError] = useState(false);
+
+//   const fetchStocks = async () => {
+//     try {
+//       const data = await getAllStocks();
+//       setStocks(data);
+//     } catch (err) {
+//       console.error('Failed to retrieve stocks:', err);
+//       setError(true);
+//     }
+//   };
+
+//   useEffect(() => {
+//     if(loginCheck) {
+//         fetchStocks();
+//         console.log(stocks);
+//     }
+//     }, [loginCheck]);
+// if (error) {
+//     return <ErrorPage />;
+//   }
+
+//   const deleteIndvTicket = async (ticketId: number) : Promise<ApiMessage> => {
+//     try {
+//       const data = await deleteTicket(ticketId);
+//       fetchTickets();
+//       return data;
+//     } catch (err) {
+//       return Promise.reject(err);
+//     }
+//   }
