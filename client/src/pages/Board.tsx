@@ -1,5 +1,6 @@
 import { useEffect, useState, useLayoutEffect } from 'react';
 // import { Link } from 'react-router-dom';
+import React from 'react';
 
 import { getAllStocks } from '../api/stockAPI';
 import ErrorPage from './ErrorPage';
@@ -9,10 +10,12 @@ import Login from './Login.tsx'
 // import { ApiMessage } from '../interfaces/ApiMessage';
 
 import auth from '../utils/auth';
-
 // const boardStates = ['Todo', 'In Progress', 'Done'];
 
-const DashBoard = () => {
+import LineChart from '../components/Chart.tsx';
+
+
+const DashBoard:React.FC = () => {
   const [stocks, setStocks] = useState<StockData[]>([]);
   const [error, setError] = useState(false);
   const [loginCheck, setLoginCheck] = useState(false);
@@ -32,16 +35,17 @@ const DashBoard = () => {
       setError(true);
     }
   };
+  
 
-//   const deleteIndvTicket = async (ticketId: number) : Promise<ApiMessage> => {
-//     try {
-//       const data = await deleteTicket(ticketId);
-//       fetchTickets();
-//       return data;
-//     } catch (err) {
-//       return Promise.reject(err);
-//     }
-//   }
+  // const deleteIndvStock = async (stockId: number) : Promise<ApiMessage> => {
+  //   try {
+  //     const data = await deleteStock(stockId);
+  //     fetchStocks();
+  //     return data;
+  //   } catch (err) {
+  //     return Promise.reject(err);
+  //   }
+  // }
 
   useLayoutEffect(() => {
     checkLogin();
@@ -58,6 +62,7 @@ const DashBoard = () => {
     return <ErrorPage />;
   }
 
+  
   return (
     <>
     {
@@ -72,17 +77,20 @@ const DashBoard = () => {
           <div className='board'>
             <button type='button' id='create-stock-link'>
               {/* <Link to='/create' >New Stock</Link> */}
+              ➕
             </button>
             <div className='board-display'>
-            <p>This is a test</p>
+              
+            <LineChart />
+            
               {/* {boardStates.map((status) => {
-                const filteredTickets = tickets.filter(ticket => ticket.status === status);
+                const filteredTickets = stocks.filter(stock => stock.status === status);
                 return (
                   <Swimlane 
                     title={status} 
                     key={status} 
-                    tickets={filteredTickets} 
-                    deleteTicket={deleteIndvTicket}
+                    stocks={filteredTickets} 
+                    // deleteStock={deleteIndvStock}
                   />
                 );
               })} */}

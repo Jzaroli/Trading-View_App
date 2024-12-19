@@ -1,37 +1,37 @@
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-// import { StockAttributes } from '../interfaces/StockAttributes';
-// import { ApiMessage } from '../interfaces/ApiMessage';
-// import { MouseEventHandler } from 'react';
+import { StockData } from '../interfaces/StockData.tsx';
+import { ApiMessage } from '../interfaces/ApiMessage';
+import { MouseEventHandler } from 'react';
 
-// interface TicketCardProps {
-//   ticket: StockAttributes;
-//   deleteTicket: (ticketId: number) => Promise<ApiMessage>
-// }
+interface StockCardProps {
+  stock: StockData;
+  deleteStock: (stockId: number) => Promise<ApiMessage>
+}
 
-// const TicketCard = ({ ticket, deleteTicket }: TicketCardProps) => {
+const StockCard = ({ stock, deleteStock }: StockCardProps) => {
 
-//   const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
-//     const ticketId = Number(event.currentTarget.value);
-//     if (!isNaN(ticketId)) {
-//       try {
-//         const data = await deleteTicket(ticketId);
-//         return data;
-//       } catch (error) {
-//         console.error('Failed to delete ticket:', error);
-//       }
-//     }
-//   };
+  const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
+    const stockId = Number(event.currentTarget.value);
+    if (!isNaN(stockId)) {
+      try {
+        const data = await deleteStock(stockId);
+        return data;
+      } catch (error) {
+        console.error('Failed to delete ticket:', error);
+      }
+    }
+  };
 
-//   return (
-//     <div className='ticket-card'>
-//       <h3>{ticket.name}</h3>
-//       <p>{ticket.description}</p>
-//       <p>{ticket.assignedUser?.username}</p>
-//       <Link to='/edit' state={{id: ticket.id}} type='button' className='editBtn'>Edit</Link>
-//       <button type='button' value={String(ticket.id)} onClick={handleDelete} className='deleteBtn'>Delete</button>
-//     </div>
-//   );
-// };
+  return (
+    <div className='ticket-card'>
+      <h3>{stock.symbol}</h3>
+      <p>{stock.status}</p>
+      <p>{stock.assignedUser?.username}</p>
+      <Link to='/edit' state={{id: stock.id}} type='button' className='editBtn'>Edit</Link>
+      <button type='button' value={String(stock.id)} onClick={handleDelete} className='deleteBtn'>Delete</button>
+    </div>
+  );
+};
 
-// export default TicketCard;
+export default StockCard;

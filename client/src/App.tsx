@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 // import lineGraph from './assets/line_graph.gif'
 
 const styles = {
