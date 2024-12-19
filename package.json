@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@types/sequelize": "^4.28.20",
+    "bootstrap": "^5.3.3",
     "dotenv": "^16.4.7",
     "pg": "^8.13.1",
     "sequelize": "^6.37.5"

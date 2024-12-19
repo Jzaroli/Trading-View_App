@@ -1,130 +1,130 @@
-// import { StockAttributes } from '../interfaces/StockAttributes';
-// import { ApiMessage } from '../interfaces/ApiMessage';
-// import Auth from '../utils/auth';
+import { StockData } from '../interfaces/StockData';
+import { ApiMessage } from '../interfaces/ApiMessage';
+import Auth from '../utils/auth';
 
-// const retrieveTickets = async () => {
-//   try {
-//     const response = await fetch(
-//       '/api/tickets/',
-//       {
-//         headers: {
-//           'Content-Type': 'application/json',
-//           Authorization: `Bearer ${Auth.getToken()}`
-//         }
-//       }
-//     );
-//     const data = await response.json();
+const getAllStocks = async () => {
+  try {
+    const response = await fetch(
+      '/api/stocks/',
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${Auth.getToken()}`
+        }
+      }
+    );
+    const data = await response.json();
 
-//     if(!response.ok) {
-//       throw new Error('invalid API response, check network tab!');
-//     }
+    if(!response.ok) {
+      throw new Error('invalid API response, check network tab!');
+    }
 
-//     return data;
-//   } catch (err) {
-//     console.log('Error from data retrieval: ', err);
-//     return [];
-//   }
-// };
+    return data;
+  } catch (err) {
+    console.log('Error from data retrieval: ', err);
+    return [];
+  }
+};
 
-// const retrieveTicket = async (id: number | null): Promise<StockAttributes> => {
-//   try {
-//     const response = await fetch(
-//       `/api/tickets/${id}`,
-//       {
-//         headers: {
-//           'Content-Type': 'application/json',
-//           Authorization: `Bearer ${Auth.getToken()}`
-//         }
-//       }
-//     );
+const getStockById = async (id: number | null): Promise<StockData> => {
+  try {
+    const response = await fetch(
+      `/api/stocks/${id}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${Auth.getToken()}`
+        }
+      }
+    );
 
-//     const data = await response.json();
+    const data = await response.json();
 
-//     if(!response.ok) {
-//       throw new Error('Could not invalid API response, check network tab!');
-//     }
-//     return data;
-//   } catch (err) {
-//     console.log('Error from data retrieval: ', err);
-//     return Promise.reject('Could not fetch singular ticket');
-//   }
-// }
+    if(!response.ok) {
+      throw new Error('invalid API response, check network tab!');
+    }
+    return data;
+  } catch (err) {
+    console.log('Error from data retrieval: ', err);
+    return Promise.reject('Could not fetch singular stock');
+  }
+}
 
-// const createTicket = async (body: StockAttributes) => {
-//   try {
-//     const response = await fetch(
-//       '/api/tickets/', {
-//         method: 'POST',
-//           headers: {
-//             'Content-Type': 'application/json',
-//             Authorization: `Bearer ${Auth.getToken()}`
-//           },
-//         body: JSON.stringify(body)
-//       }
+const createStock = async (body: StockData) => {
+  try {
+    const response = await fetch(
+      '/api/stocks/', {
+        method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${Auth.getToken()}`
+          },
+        body: JSON.stringify(body)
+      }
 
-//     )
-//     const data = response.json();
+    )
+    const data = response.json();
 
-//     if(!response.ok) {
-//       throw new Error('invalid API response, check network tab!');
-//     }
+    if(!response.ok) {
+      throw new Error('invalid API response, check network tab!');
+    }
 
-//     return data;
+    return data;
 
-//   } catch (err) {
-//     console.log('Error from Ticket Creation: ', err);
-//     return Promise.reject('Could not create ticket');
-//   }
-// }
+  } catch (err) {
+    console.log('Error from Stock Creation: ', err);
+    return Promise.reject('Could not create stock');
+  }
+}
 
-// const updateTicket = async (ticketId: number, body: StockAttributes): Promise<StockAttributes> => {
-//   try {
-//     const response = await fetch(
-//       `/api/tickets/${ticketId}`, {
-//         method: 'PUT',
-//         headers: {
-//           'Content-Type': 'application/json',
-//           Authorization: `Bearer ${Auth.getToken()}`
-//         },
-//         body: JSON.stringify(body)
-//       }
-//     )
-//     const data = await response.json();
+const updateStock = async (stockId: number, body: StockData): Promise<StockData> => {
+  try {
+    const response = await fetch(
+      `/api/stocks/${stockId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${Auth.getToken()}`
+        },
+        body: JSON.stringify(body)
+      }
+    )
+    const data = await response.json();
 
-//     if(!response.ok) {
-//       throw new Error('invalid API response, check network tab!');
-//     }
+    if(!response.ok) {
+      throw new Error('invalid API response, check network tab!');
+    }
 
-//     return data;
-//   } catch (err) {
-//     console.error('Update did not work', err);
-//     return Promise.reject('Update did not work');
-//   }
-// };
+    return data;
+  } catch (err) {
+    console.error('Update did not work', err);
+    return Promise.reject('Update did not work');
+  }
+};
 
-// const deleteTicket = async (ticketId: number): Promise<ApiMessage> => {
-//   try {
-//     const response = await fetch(
-//       `/api/tickets/${ticketId}`, {
-//         method: 'DELETE',
-//         headers: {
-//           'Content-Type': 'application/json',
-//           Authorization: `Bearer ${Auth.getToken()}`
-//         }
-//       }
-//     )
-//     const data = await response.json();
+const deleteStock = async (stockId: number): Promise<ApiMessage> => {
+  try {
+    const response = await fetch(
+      `/api/stocks/${stockId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${Auth.getToken()}`
+        }
+      }
+    )
+    const data = await response.json();
 
-//     if(!response.ok) {
-//       throw new Error('invalid API response, check network tab!');
-//     }
+    if(!response.ok) {
+      throw new Error('invalid API response, check network tab!');
+    }
 
-//     return data;
-//   } catch (err) {
-//     console.error('Error in deleting ticket', err);
-//     return Promise.reject('Could not delete ticket');
-//   }
-// };
+    return data;
+  } catch (err) {
+    console.error('Error in deleting stock', err);
+    return Promise.reject('Could not delete stock');
+  }
+};
 
 
-// export { createTicket, deleteTicket, retrieveTickets, retrieveTicket, updateTicket};
+export { getAllStocks, getStockById, createStock, updateStock, deleteStock};
