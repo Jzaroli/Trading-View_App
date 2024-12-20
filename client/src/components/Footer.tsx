@@ -3,6 +3,10 @@ import coindesk from '../assets/coindesk.png';
 
 const styles = {
     footer: {
+        display: 'flex',
+        flexDirection: 'row' as React.CSSProperties['flexDirection'],
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: '#6D8EA0',
         position: 'static' as React.CSSProperties['position'],
         bottom: 0,
@@ -11,7 +15,6 @@ const styles = {
         height: '6.5vw',
         padding: '0.5vw',
         marginTop: '1vw',        
-        textAlign: 'center' as React.CSSProperties['textAlign']
     },
     logo1: {
         height: '3vw',

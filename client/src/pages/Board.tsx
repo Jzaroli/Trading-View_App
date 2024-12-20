@@ -3,6 +3,9 @@ import { useState, useLayoutEffect, ChangeEvent, FormEvent, useEffect} from 'rea
 import Login from './Login.tsx'
 import auth from '../utils/auth';
 import { searchAlpacaSymbol } from '../api/alpacaAPI';
+import Chart from '../components/Chart.tsx';
+import { createStock } from '../api/stockAPI.tsx';
+
 
 interface stockBar {
     c: number;
@@ -16,10 +19,34 @@ interface stockBar {
 }
 
 const DashBoard = () => {
-
   const [loginCheck, setLoginCheck] = useState(false);
-  const [stockSymbol, setStockSymbol] = useState('');
-  const [lineData, setLineData] = useState<number[]>([]);
+  const [stockSymbol, setStockSymbol] = useState(''); //searched stock symbol
+  const [lineData, setLineData] = useState<number[]>([]); //returned arrays of numbers from API call
+  const [chartReady, setChartReady] = useState(false); //sets state for chart and save button to appear
+
+  const styles = {
+    btnRow: {
+      display: 'flex',
+      flexDirection: 'row' as React.CSSProperties['flexDirection'],
+      justifyContent: chartReady ? 'space-between' : 'left',
+      alignItems: 'center',
+      marginTop: '1vw',
+      fontFamily: 'Roboto',
+    },
+    form: {
+      
+    },
+    chartParent: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    chart: {
+      marginTop: '3vw',
+      width: '70vw',
+      height: '40vw'
+    }
+  }
 
   const checkLogin = () => {
     if(auth.loggedIn()) {
@@ -36,8 +63,8 @@ const DashBoard = () => {
         // console.log ('No initial stock searched');
         return;
     }
-    setLineData(lineData); // Pass the `user` prop as the username
-    console.log('this is the new linedata', lineData)
+    setLineData(lineData);
+    // console.log('this is the new linedata', lineData)
 }, [lineData]);
 
 // Searches for stock based on symbol
@@ -57,16 +84,17 @@ const DashBoard = () => {
         })
             // console.log('this is the highArray', highArray);
         setLineData(highArray)
+        setChartReady(true);
         } catch (error) {
             console.error('Error fetching stocks:', error);
         }
     };  
 
-const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const {value} = e.target;
     setStockSymbol(value);
     // console.log(stockSymbol);
-}
+  }
 
   return (
     <>
@@ -80,7 +108,8 @@ const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         </div>  
       ) : (
         <div>
-            <form className='form'onSubmit={searchStock}  >
+          <div style={styles.btnRow}>
+            <form style={styles.form} className='form' onSubmit={searchStock}  >
                 <label>Stock Symbol</label>
                 <input 
                     type='text'
@@ -91,6 +120,21 @@ const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
                 />
                 <button type='submit'>Search</button>
             </form>
+            {!chartReady ? (<></>
+              ) : (
+                <button onClick={() => createStock(stockSymbol)} type='submit'>Save</button>
+              )
+            }
+          </div>
+            {!chartReady ? (<></>
+              ) : (
+                <div style={styles.chartParent}>
+                <div style={styles.chart}>
+                <Chart hourlyData={lineData}/>
+                </div>
+                </div>
+              )
+            }
         </div>
         )
     }

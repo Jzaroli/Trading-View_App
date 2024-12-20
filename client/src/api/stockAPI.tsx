@@ -1,6 +1,7 @@
 import { StockData } from '../interfaces/StockData';
 import { ApiMessage } from '../interfaces/ApiMessage';
 import Auth from '../utils/auth';
+import { type JwtPayload, jwtDecode } from 'jwt-decode';
 
 const getAllStocks = async () => {
   try {
@@ -50,8 +51,14 @@ const getStockById = async (id: number | null): Promise<StockData> => {
   }
 }
 
-const createStock = async (body: StockData) => {
+const createStock = async (symbol: string) => {
   try {
+    const loggedUser = localStorage.getItem('id_token') || '';
+    if (!loggedUser) throw new Error('No token found in localStorage');
+
+    const decoded = jwtDecode<JwtPayload>(loggedUser); ; //get from JWT
+    const assignedUserId = decoded.username;
+    if (!decoded.username) throw new Error('Invalid token: username missing');
     const response = await fetch(
       '/api/stocks/', {
         method: 'POST',
@@ -59,16 +66,18 @@ const createStock = async (body: StockData) => {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${Auth.getToken()}`
           },
-        body: JSON.stringify(body)
+        body: JSON.stringify({
+          symbol,
+          assignedUserId
+        })
       }
-
-    )
-    const data = response.json();
-
+    )  
+    
     if(!response.ok) {
       throw new Error('invalid API response, check network tab!');
     }
-
+    
+    const data = response.json();
     return data;
 
   } catch (err) {
