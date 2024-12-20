@@ -1,14 +1,25 @@
-import { useState, useLayoutEffect, ChangeEvent, FormEvent } from 'react';
+import { useState, useLayoutEffect, ChangeEvent, FormEvent, useEffect} from 'react';
 // import { Link } from 'react-router-dom';
 import Login from './Login.tsx'
 import auth from '../utils/auth';
 import { searchAlpacaSymbol } from '../api/alpacaAPI';
 
+interface stockBar {
+    c: number;
+    h: number;
+    l: number;
+    n: number;
+    o: number;
+    t: string;
+    v: number;
+    vw: number;
+}
 
 const DashBoard = () => {
 
   const [loginCheck, setLoginCheck] = useState(false);
   const [stockSymbol, setStockSymbol] = useState('');
+  const [lineData, setLineData] = useState<number[]>([]);
 
   const checkLogin = () => {
     if(auth.loggedIn()) {
@@ -20,20 +31,35 @@ const DashBoard = () => {
     checkLogin();
   }, []);
 
+  useEffect(() => {
+    if (!lineData) {
+        // console.log ('No initial stock searched');
+        return;
+    }
+    setLineData(lineData); // Pass the `user` prop as the username
+    console.log('this is the new linedata', lineData)
+}, [lineData]);
+
 // Searches for stock based on symbol
   const searchStock = async (e: FormEvent) => {
     e.preventDefault();
     try {
         const data = await searchAlpacaSymbol(stockSymbol);
-    if (data) {  
-        console.log(data);
-        console.log('Found Stock');
-    } else {
-        console.log('No stocks found');
-    }
-    } catch (error) {
-        console.error('Error fetching stocks:', error);
-    }
+        if (!data) {  
+            console.log('No stocks found');
+            return;
+        }
+        const accessData: stockBar[] = data.bars[stockSymbol];
+        // console.log('data is', accessData);
+        let highArray: number[] = [];
+        accessData.slice(1).forEach((bar: stockBar) => {
+            highArray.push(bar.h);
+        })
+            // console.log('this is the highArray', highArray);
+        setLineData(highArray)
+        } catch (error) {
+            console.error('Error fetching stocks:', error);
+        }
     };  
 
 const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
