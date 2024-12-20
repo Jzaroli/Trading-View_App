@@ -1,8 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import lineGraph from './assets/line_graph.gif'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const styles = {
   body: {
@@ -26,7 +25,6 @@ function App() {
         <NavBar />
         <main style={styles.main} className='mx-3'>
           <Outlet />
-          {/* <img src={lineGraph} /> */}
         </main>
         <Footer />
       </div>
