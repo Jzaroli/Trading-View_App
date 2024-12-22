@@ -4,6 +4,41 @@ import Auth from '../utils/auth';
 import { login } from "../api/authAPI";
 
 const Login = () => {
+  const styles = {
+    div: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexDirection: 'Column' as React.CSSProperties['flexDirection'],
+      marginTop: '1vw'
+    },
+    form: {
+      fontFamily: 'Roboto',
+    },
+    h1: {
+      // fontSize: '4vw',
+      marginBottom: '2vw'
+    },
+    inputs: {
+      // width: '100%',
+    },
+    button: {
+      textDecoration: 'none' as React.CSSProperties['textDecoration'],
+      color: '#AFA98D',
+      backgroundColor: '#182825',
+      display: 'inline-flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      fontSize: '1rem',
+      textAlign: 'center' as React.CSSProperties['textAlign'],
+      padding: '0.9vw',
+      border: 'none',
+      borderRadius: '8%',
+      marginTop: '1vw'
+    },
+
+  }
+
   const [loginData, setLoginData] = useState({
     username: '',
     password: ''
@@ -28,26 +63,39 @@ const Login = () => {
   };
 
   return (
-    <div className='form-container'>
-      <form className='form' onSubmit={handleSubmit}>
-        <h1>Login</h1>
-        <label >Username</label>
-        <input 
-          type='text'
-          name='username'
-          value={loginData.username || ''}
-          onChange={handleChange}
-          required
-        />
-      <label>Password</label>
-        <input 
-          type='password'
+    <div style={styles.div} className='form-container'>
+      <form style={styles.form} className='form' onSubmit={handleSubmit}>
+        <h1 style={styles.h1}>Login to view stocks!</h1>
+        <div className="form-group">
+          <label>Username</label>
+          <input 
+            style={styles.inputs}
+            type="text" 
+            className="form-control" 
+            id="exampleInputEmail1" 
+            aria-describedby="emailHelp" 
+            placeholder="Username"
+            name='username'
+            value={loginData.username || ''}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label>Password</label>
+          <input 
+          style={styles.inputs}
+          type="password" 
+          className="form-control" 
+          id="exampleInputPassword1" 
+          placeholder="Password"
           name='password'
           value={loginData.password || ''}
           onChange={handleChange}
           required
-        />
-        <button type='submit'>Login</button>
+          />
+        </div>
+        <button style={styles.button}  type="submit" className="btn">Submit</button>
       </form>
     </div>
     
@@ -55,3 +103,21 @@ const Login = () => {
 };
 
 export default Login;
+
+{/* <label >Username</label>
+<input 
+  type='text'
+  
+  value={loginData.username || ''}
+  onChange={handleChange}
+  required
+/>
+<label>Password</label>
+<input 
+  type='password'
+  
+  value={loginData.password || ''}
+  onChange={handleChange} 
+  required
+/>
+<button type='submit'>Login</button> */}
