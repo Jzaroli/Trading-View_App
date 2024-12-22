@@ -13,9 +13,9 @@ const styles = {
     listStyleType: 'none',
     overflow: 'auto',
     position: 'sticky' as React.CSSProperties['position'],
-    fontSize: '5vh',
-    height: '7vw',
-    padding: '1vw',
+    height: '4rem',
+    padding: '2rem',
+    marginBottom: '0.5rem',
     top: 0,
     left: 0,
     width: '100%',
@@ -23,14 +23,15 @@ const styles = {
     zIndex: 15
   },
   title: {
-    fontSize: '3vw',
+    fontSize: '1.5rem',
     fontWeight: 700,
     color: '#182825',
     textDecoration: 'none',
-    marginRight: '2vw'
+    marginRight: '2vw',
+
   },
   favorites: {
-    fontSize: '2.5vw',
+    fontSize: '1.1rem',
     fontWeight: 700,
     color: '#182825',
     textDecoration: 'none',
@@ -43,7 +44,7 @@ const styles = {
     display: 'inline-flex',
     justifyContent: 'center',
     alignItems: 'center',
-    fontSize: '1.8vw',
+    fontSize: '1rem',
     textAlign: 'center' as React.CSSProperties['textAlign'],
     padding: '1vw',
     border: 'none',
@@ -83,7 +84,7 @@ const Navbar = () => {
             to='/' 
             className={currentPage === '/' ? 'nav-link active' : 'nav-link'}
           > 
-            Let's Make a Trade!
+            Make a Trade!
           </Link>
         </div>    
         {!loginCheck ? (

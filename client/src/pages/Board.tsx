@@ -30,11 +30,9 @@ const DashBoard = () => {
       flexDirection: 'row' as React.CSSProperties['flexDirection'],
       justifyContent: chartReady ? 'space-between' : 'left',
       alignItems: 'center',
+      height: '2rem',
       marginTop: '1vw',
       fontFamily: 'Roboto',
-    },
-    form: {
-      
     },
     chartParent: {
       display: 'flex',
@@ -42,10 +40,42 @@ const DashBoard = () => {
       alignItems: 'center',
     },
     chart: {
-      marginTop: '3vw',
-      width: '70vw',
+      marginTop: '1vw',
+      width: '75vw',
       height: '40vw'
-    }
+    },
+    button: {
+      textDecoration: 'none' as React.CSSProperties['textDecoration'],
+      color: '#AFA98D',
+      backgroundColor: '#182825',
+      display: 'inline-flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      fontSize: '0.9rem',
+      textAlign: 'center' as React.CSSProperties['textAlign'],
+      padding: '0.9vw',
+      border: 'none',
+      borderRadius: '8%',
+      marginLeft: '1vw',
+    },
+    input: {
+      marginLeft: '1vw',
+    },
+    saveButton: {
+      textDecoration: 'none' as React.CSSProperties['textDecoration'],
+      color: '#AFA98D',
+      backgroundColor: '#182825',
+      display: 'inline-flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      fontSize: '0.9rem',
+      textAlign: 'center' as React.CSSProperties['textAlign'],
+      padding: '0.9vw',
+      border: 'none',
+      borderRadius: '8%',
+      marginLeft: '1vw',
+      marginRight: '2vw'
+    },
   }
 
   const checkLogin = () => {
@@ -101,15 +131,12 @@ const DashBoard = () => {
     {
       !loginCheck ? (
         <div className='login-notice'>
-          <h1>
-            Login to create & view stocks!
-          </h1>
           <Login />
         </div>  
       ) : (
         <div>
           <div style={styles.btnRow}>
-            <form style={styles.form} className='form' onSubmit={searchStock}  >
+            <form className='form' onSubmit={searchStock}  >
                 <label>Stock Symbol</label>
                 <input 
                     type='text'
@@ -117,12 +144,13 @@ const DashBoard = () => {
                     value={stockSymbol || ''}
                     onChange={handleChange}
                     required
+                    style={styles.input} 
                 />
-                <button type='submit'>Search</button>
+                <button style={styles.button} type='submit'>Search</button>
             </form>
             {!chartReady ? (<></>
               ) : (
-                <button onClick={() => createStock(stockSymbol)} type='submit'>Save</button>
+                <button style={styles.saveButton}  onClick={() => createStock(stockSymbol)} type='submit'>Save</button>
               )
             }
           </div>
@@ -130,7 +158,7 @@ const DashBoard = () => {
               ) : (
                 <div style={styles.chartParent}>
                 <div style={styles.chart}>
-                <Chart hourlyData={lineData}/>
+                <Chart hourlyData={lineData} symbol={stockSymbol}/>
                 </div>
                 </div>
               )

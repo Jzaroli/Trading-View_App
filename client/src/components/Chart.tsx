@@ -7,9 +7,10 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 
 type importedNumberData = {
   hourlyData: number[];
+  symbol: string;
 }
 
-const LineChart = ({hourlyData}: importedNumberData) => {
+const LineChart = ({hourlyData, symbol}: importedNumberData) => {
 
     const data = {
         labels: ["4am", "5am", "6am", "7am", "8am", "9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm", "6pm"], // X-axis labels
@@ -32,7 +33,7 @@ const LineChart = ({hourlyData}: importedNumberData) => {
           },
           title: {
             display: true,
-            text: "Daily Chart",
+            text: `${symbol} Daily Chart`,
           },
         },
         scales: {
@@ -40,7 +41,6 @@ const LineChart = ({hourlyData}: importedNumberData) => {
             title: {
               display: true,
               text: "Time of the Day (EST)",
-              FontSize: '2vw'
             },
           },
           y: {
