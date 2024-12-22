@@ -11,7 +11,7 @@ const seedAll = async (): Promise<void> => {
     console.log('\n----- USERS SEEDED -----\n');
     
     await seedStocks();
-    console.log('\n----- TICKETS SEEDED -----\n');
+    console.log('\n----- STOCKS SEEDED -----\n');
     
     process.exit(0);
   } catch (error) {
