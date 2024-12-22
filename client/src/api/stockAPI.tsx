@@ -57,8 +57,9 @@ const createStock = async (symbol: string) => {
     if (!loggedUser) throw new Error('No token found in localStorage');
 
     const decoded = jwtDecode<JwtPayload>(loggedUser); ; //get from JWT
-    const assignedUserId = decoded.username;
-    if (!decoded.username) throw new Error('Invalid token: username missing');
+    const assignedUserId = decoded.assignedUserId;
+    console.log('  equald', assignedUserId)
+    if (!decoded.assignedUserId) throw new Error('Invalid token: username missing');
     const response = await fetch(
       '/api/stocks/', {
         method: 'POST',
