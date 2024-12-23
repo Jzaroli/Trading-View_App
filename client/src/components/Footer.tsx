@@ -1,6 +1,7 @@
 import wsj from '../assets/WSJ.png';
 import coindesk from '../assets/coindesk.png';
 
+//Styling:
 const styles = {
     footer: {
         display: 'flex',
@@ -27,6 +28,7 @@ const styles = {
     }
 }
 
+// Footer has both a WSJ and CoinDesk logo/link:
 function Footer () {
     return (
         <footer style={styles.footer}>

@@ -5,6 +5,7 @@ import { Line } from "react-chartjs-2";
 // Register Chart.js components
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
+//Set ups type/interface for data handed down through props:
 type importedNumberData = {
   hourlyData: number[];
   symbol: string;
@@ -53,9 +54,6 @@ const LineChart = ({hourlyData, symbol}: importedNumberData) => {
       };
     
       return <Line data={data} options={options} />;
-
-    // const x = new Date('2024-01-03T23:00:00Z')
-    // console.log(x.toLocaleDateString());
 
     };
 export default LineChart;

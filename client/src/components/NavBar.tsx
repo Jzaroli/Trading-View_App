@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation} from 'react-router-dom';
 import auth from '../utils/auth.ts';
-// import lineGraph from '../assets/line_graph.gif';
 
 const styles = {
   nav: {
@@ -72,10 +71,11 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    console.log(loginCheck);
+    // console.log(loginCheck);
     checkLogin();
   }, [loginCheck])
 
+//Navbar has conditional login to show login button and home page before login, add favorites and logout once logged in:
   return (
     <nav style={styles.nav}>
         <div className='nav-item'>

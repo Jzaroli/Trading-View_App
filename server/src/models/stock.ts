@@ -14,7 +14,7 @@ export class Stock extends Model<StockAttributes, StockCreationAttributes> imple
     public symbol!: string;
     public assignedUserId!: number;
     
-    // associated User model
+    // associated user model:
     public readonly assignedUser?: User;
 
     public readonly createdAt!: Date;
