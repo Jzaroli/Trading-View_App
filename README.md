@@ -33,6 +33,8 @@ This app achieves the following, using the PERN stack:
 
 * Use the Alpaca APIs to retrieve stock data.
 
+* It uses Chart.js to create nice graphs with the stock data.
+
 * Has a folder structure that follows the separation of concerns design principle.
 
 * Includes authentication using JWT.
