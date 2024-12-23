@@ -29,6 +29,8 @@ This app achieves the following, using the PERN stack:
 
 * Uses PostgreSQL and the Sequelize ORM for the database.
 
+* Uses Typescript for strict typing.
+
 * Has both GET and POST routes for retrieving and adding new data.
 
 * Use the Alpaca APIs to retrieve stock data.
