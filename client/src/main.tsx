@@ -4,7 +4,7 @@ import DashBoard from './pages/Board.tsx'
 
 import App from './App.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
-// import Favorites from './pages/Favorites.tsx';
+import Favorites from './pages/Favorites.tsx';
 import Login from './pages/Login.tsx';
 
 const router = createBrowserRouter([
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/favorites',
-        // element: <Favorites />
+        element: <Favorites />
       }
     ]
   }

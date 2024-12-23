@@ -3,6 +3,7 @@ import { ApiMessage } from '../interfaces/ApiMessage';
 import Auth from '../utils/auth';
 import { type JwtPayload, jwtDecode } from 'jwt-decode';
 
+//Returns all stocks for authenticated user
 const getAllStocks = async () => {
   try {
     const response = await fetch(
@@ -27,6 +28,7 @@ const getAllStocks = async () => {
   }
 };
 
+//Returns single stock for authenticated user
 const getStockById = async (id: number | null): Promise<StockData> => {
   try {
     const response = await fetch(
@@ -51,14 +53,15 @@ const getStockById = async (id: number | null): Promise<StockData> => {
   }
 }
 
+//Creates stock in DB:
 const createStock = async (symbol: string) => {
   try {
     const loggedUser = localStorage.getItem('id_token') || '';
     if (!loggedUser) throw new Error('No token found in localStorage');
-
-    const decoded = jwtDecode<JwtPayload>(loggedUser); ; //get from JWT
+    //Pulls assignedUserId from JWT tokent
+    const decoded = jwtDecode<JwtPayload>(loggedUser);
     const assignedUserId = decoded.assignedUserId;
-    console.log('  equald', assignedUserId)
+    // console.log('equalD', assignedUserId)
     if (!decoded.assignedUserId) throw new Error('Invalid token: username missing');
     const response = await fetch(
       '/api/stocks/', {
@@ -68,6 +71,7 @@ const createStock = async (symbol: string) => {
             Authorization: `Bearer ${Auth.getToken()}`
           },
         body: JSON.stringify({
+          //Passes symbol and assignedUserId for creating record in DB:
           symbol,
           assignedUserId
         })
@@ -87,6 +91,7 @@ const createStock = async (symbol: string) => {
   }
 }
 
+//Update function, not currently used:
 const updateStock = async (stockId: number, body: StockData): Promise<StockData> => {
   try {
     const response = await fetch(
@@ -112,6 +117,7 @@ const updateStock = async (stockId: number, body: StockData): Promise<StockData>
   }
 };
 
+//Delete function, not currently used:
 const deleteStock = async (stockId: number): Promise<ApiMessage> => {
   try {
     const response = await fetch(

@@ -1,12 +1,11 @@
 import { useState, useLayoutEffect, ChangeEvent, FormEvent, useEffect} from 'react';
-// import { Link } from 'react-router-dom';
 import Login from './Login.tsx'
 import auth from '../utils/auth';
 import { searchAlpacaSymbol } from '../api/alpacaAPI';
 import Chart from '../components/Chart.tsx';
 import { createStock } from '../api/stockAPI.tsx';
 
-
+// Defines interface for Alapaca API results
 interface stockBar {
     c: number;
     h: number;
@@ -19,19 +18,19 @@ interface stockBar {
 }
 
 const DashBoard = () => {
-  const [loginCheck, setLoginCheck] = useState(false);
-  const [stockSymbol, setStockSymbol] = useState(''); //searched stock symbol
-  const [lineData, setLineData] = useState<number[]>([]); //returned arrays of numbers from API call
-  const [chartReady, setChartReady] = useState(false); //sets state for chart and save button to appear
+  const [loginCheck, setLoginCheck] = useState(false); //For authentication
+  const [stockSymbol, setStockSymbol] = useState(''); //Searched stock symbol
+  const [lineData, setLineData] = useState<number[]>([]); //Returned arrays of numbers from API call
+  const [chartReady, setChartReady] = useState(false); //Sets state for chart and save button to appear
 
   const styles = {
     btnRow: {
       display: 'flex',
       flexDirection: 'row' as React.CSSProperties['flexDirection'],
       justifyContent: chartReady ? 'space-between' : 'left',
-      alignItems: 'center',
       height: '2rem',
       marginTop: '1vw',
+      marginBottom: '6vw',
       fontFamily: 'Roboto',
     },
     chartParent: {
@@ -61,6 +60,12 @@ const DashBoard = () => {
     input: {
       marginLeft: '1vw',
     },
+    form: {
+      alignItems: 'left'
+    },
+    label: {
+      marginLeft: '1vw'
+    },
     saveButton: {
       textDecoration: 'none' as React.CSSProperties['textDecoration'],
       color: '#AFA98D',
@@ -74,7 +79,7 @@ const DashBoard = () => {
       border: 'none',
       borderRadius: '8%',
       marginLeft: '1vw',
-      marginRight: '2vw'
+      marginRight: '2vw',
     },
   }
 
@@ -134,10 +139,12 @@ const DashBoard = () => {
           <Login />
         </div>  
       ) : (
+        //Includes form for searching stock based on symbol:
         <div>
           <div style={styles.btnRow}>
-            <form className='form' onSubmit={searchStock}  >
-                <label>Stock Symbol</label>
+            <form style={styles.form} className='form' onSubmit={searchStock}  >
+                <label style={styles.label} >Stock Symbol</label>
+                <br></br>
                 <input 
                     type='text'
                     name='symbol'
@@ -150,12 +157,14 @@ const DashBoard = () => {
             </form>
             {!chartReady ? (<></>
               ) : (
+                //Save button appears once stock is searched and chart is populated:
                 <button style={styles.saveButton}  onClick={() => createStock(stockSymbol)} type='submit'>Save</button>
               )
             }
           </div>
             {!chartReady ? (<></>
               ) : (
+                //Chart import with associated styling:
                 <div style={styles.chartParent}>
                 <div style={styles.chart}>
                 <Chart hourlyData={lineData} symbol={stockSymbol}/>
@@ -171,42 +180,3 @@ const DashBoard = () => {
 };
 
 export default DashBoard;
-
-
-// import { getAllStocks } from '../api/stockAPI';
-// import ErrorPage from './ErrorPage';
-// import { ApiMessage } from '../interfaces/ApiMessage';
-// import { StockData } from '../interfaces/StockData.tsx';
-
-//   const [stocks, setStocks] = useState<StockData[]>([]);
-//   const [error, setError] = useState(false);
-
-//   const fetchStocks = async () => {
-//     try {
-//       const data = await getAllStocks();
-//       setStocks(data);
-//     } catch (err) {
-//       console.error('Failed to retrieve stocks:', err);
-//       setError(true);
-//     }
-//   };
-
-//   useEffect(() => {
-//     if(loginCheck) {
-//         fetchStocks();
-//         console.log(stocks);
-//     }
-//     }, [loginCheck]);
-// if (error) {
-//     return <ErrorPage />;
-//   }
-
-//   const deleteIndvTicket = async (ticketId: number) : Promise<ApiMessage> => {
-//     try {
-//       const data = await deleteTicket(ticketId);
-//       fetchTickets();
-//       return data;
-//     } catch (err) {
-//       return Promise.reject(err);
-//     }
-//   }

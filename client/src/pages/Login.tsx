@@ -16,11 +16,9 @@ const Login = () => {
       fontFamily: 'Roboto',
     },
     h1: {
-      // fontSize: '4vw',
       marginBottom: '2vw'
     },
     inputs: {
-      // width: '100%',
     },
     button: {
       textDecoration: 'none' as React.CSSProperties['textDecoration'],
@@ -79,6 +77,7 @@ const Login = () => {
             value={loginData.username || ''}
             onChange={handleChange}
             required
+            autoComplete="off"
           />
         </div>
         <div className="form-group">
@@ -93,9 +92,10 @@ const Login = () => {
           value={loginData.password || ''}
           onChange={handleChange}
           required
+          autoComplete="off"
           />
         </div>
-        <button style={styles.button}  type="submit" className="btn">Submit</button>
+        <button style={styles.button}  type="submit" className="btn">Login</button>
       </form>
     </div>
     
@@ -103,21 +103,3 @@ const Login = () => {
 };
 
 export default Login;
-
-{/* <label >Username</label>
-<input 
-  type='text'
-  
-  value={loginData.username || ''}
-  onChange={handleChange}
-  required
-/>
-<label>Password</label>
-<input 
-  type='password'
-  
-  value={loginData.password || ''}
-  onChange={handleChange} 
-  required
-/>
-<button type='submit'>Login</button> */}

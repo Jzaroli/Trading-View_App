@@ -1,36 +1,59 @@
 # Trading_App
 
-![GitHub License](https://img.shields.io/badge/license-MIT-orange.svg)
-
-# <Your-Project-Title> 
-
-## Questions 
-
-https://github.com/Jzaroli/Trading_App
-
-Please contact Johann at @gmail.com with any further questions.
-
-Please contact Zach at zadehartpro@gmail.com with any further questions.
-
-
 ## Description
 
-This is a trading app to track stocks.
-
+This is a trading app to view and track public equities.  
 
 ![Photo of my new portfolio, created in React.](client/src/assets/line_graph.gif)
 
 ## Table of Contents
 
-- [Questions](#questions)
 - [Description](#description)
 - [Usage](#usage)
+- [Specifications](#specifications)
+- [Questions](#questions)
 - [Credits](#credits)
 - [License](#license)
 
 ## Usage
 
-With this Trading App you can search for your favorite stocks, see their prices, and track their ups and downs.
+Once logged in, you can search for your favorite stocks and see their daily price changes.
+
+## Specifications
+
+This app achieves the following, using the PERN stack:
+
+* Uses Node.js and Express.js, creating RESTful APIs.
+
+* Uses React for the front end.
+
+* Uses PostgreSQL and the Sequelize ORM for the database.
+
+* Has both GET and POST routes for retrieving and adding new data.
+
+* Use the Alpaca APIs to retrieve stock data.
+
+* Has a folder structure that follows the separation of concerns design principle.
+
+* Includes authentication using JWT.
+
+* Protects API keys and sensitive information with environment variables.
+
+* Is deployed using Render (with data):
+
+* Has a polished UI.
+
+* Is responsive.
+
+* Is interactive (i.e., accept and respond to user input).
+
+## Questions 
+
+https://github.com/Jzaroli/Trading_App
+
+Please contact Johann on GitHub at Jzaroli with any questions.
+
+Please contact Zach at zadehartpro@gmail.com with any questions.
 
 ## Credits
 
@@ -42,4 +65,12 @@ https://github.com/ZadeHart
 
 ## License
 
-MIT
+![GitHub License](https://img.shields.io/badge/license-MIT-orange.svg)
+
+Copyright (c) <2024>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
