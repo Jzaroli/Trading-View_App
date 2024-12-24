@@ -1,0 +1,12 @@
+diff --git a/node_modules/jwt-decode/build/esm/index.d.ts b/node_modules/jwt-decode/build/esm/index.d.ts
+index d27a0be..4a36758 100644
+--- a/node_modules/jwt-decode/build/esm/index.d.ts
++++ b/node_modules/jwt-decode/build/esm/index.d.ts
+@@ -14,6 +14,7 @@ export interface JwtPayload {
+     nbf?: number;
+     iat?: number;
+     jti?: string;
++    assignedUserId?: string;
+ }
+ export declare class InvalidTokenError extends Error {
+ }
