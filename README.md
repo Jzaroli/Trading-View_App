@@ -41,7 +41,7 @@ This app achieves the following, using the PERN stack:
 
 * Includes authentication using JWT.
 
-* Protects API keys and sensitive information with environment variables.
+* Protects API keys and sensitive information with environment variables, and uses bcrypt to hash passwords.
 
 * Is deployed using Render (with data):
 
