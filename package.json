@@ -14,7 +14,8 @@
     "client:dev": "cd client && npm run dev",
     "build": "cd client && npm run build",
     "seed": "cd server && tsc && npm run seed",
-    "render-build": "npm install && npm run build"
+    "render-build": "npm install && npm run build",
+    "postinstall": "patch-package"
   },
   "keywords": [],
   "author": "",
@@ -30,7 +31,9 @@
     "@types/sequelize": "^4.28.20",
     "bootstrap": "^5.3.3",
     "dotenv": "^16.4.7",
+    "patch-package": "^8.0.0",
     "pg": "^8.13.1",
+    "postinstall-postinstall": "^2.1.0",
     "sequelize": "^6.37.5"
   }
 }
