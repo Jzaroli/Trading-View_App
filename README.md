@@ -18,6 +18,7 @@ This is a trading app to view and track public equities.
 ## Usage
 
 Once logged in, you can search for your favorite stocks and see their daily price changes.
+You may access the app at https://trading-app-v63x.onrender.com/ and use the JohnSmith/devTest! for credentials.
 
 ## Specifications
 
@@ -52,8 +53,6 @@ This app achieves the following, using the PERN stack:
 * Is interactive (i.e., accept and respond to user input).
 
 ## Questions 
-
-https://github.com/Jzaroli/Trading_App
 
 Please contact Johann on GitHub at Jzaroli with any questions.
 
