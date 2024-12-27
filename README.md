@@ -2,7 +2,9 @@
 
 ## Description
 
-This is a trading app to view and track public equities.  
+This is a trading app to view and track public equities.
+
+https://trading-app-v63x.onrender.com/
 
 ![Photo of my new portfolio, created in React.](client/src/assets/line_graph.gif)
 
@@ -16,6 +18,8 @@ This is a trading app to view and track public equities.
 - [License](#license)
 
 ## Usage
+
+![screenshot of the application](client/src/assets/demo_screenshot.png)
 
 Once logged in, you can search for your favorite stocks and see their daily price changes.
 
