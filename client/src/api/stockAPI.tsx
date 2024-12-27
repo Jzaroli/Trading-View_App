@@ -1,7 +1,8 @@
 import { StockData } from '../interfaces/StockData';
 import { ApiMessage } from '../interfaces/ApiMessage';
 import Auth from '../utils/auth';
-import { type JwtPayload, jwtDecode } from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
+// type JwtPayload,
 
 //Returns all stocks for authenticated user
 const getAllStocks = async () => {
@@ -53,13 +54,18 @@ const getStockById = async (id: number | null): Promise<StockData> => {
   }
 }
 
+interface CustomJwtPayload {
+  assignedUserId?: string; // Add your custom property
+  [key: string]: any; // Allow for other JWT properties
+}
+
 //Creates stock in DB:
 const createStock = async (symbol: string) => {
   try {
     const loggedUser = localStorage.getItem('id_token') || '';
     if (!loggedUser) throw new Error('No token found in localStorage');
     //Pulls assignedUserId from JWT tokent
-    const decoded = jwtDecode<JwtPayload>(loggedUser);
+    const decoded = jwtDecode<CustomJwtPayload>(loggedUser);
     const assignedUserId = decoded.assignedUserId;
     // console.log('equalD', assignedUserId)
     if (!decoded.assignedUserId) throw new Error('Invalid token: username missing');
